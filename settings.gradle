@@ -1,0 +1,7 @@
+rootProject.name = 'pitchcast'
+include 'registry'
+include 'gateway'
+include 'pitching-service'
+include 'support'
+include 'e2eTest'
+

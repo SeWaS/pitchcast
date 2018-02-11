@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>PitchCast</title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(function() {
+            $.get("/pitching/pitches", function(data, status){
+                $('#pitches').text(data.pitches.length+": "+data.pitches[0]);
+            });
+        });
+    </script>
+</head>
+<body>
+    Hello, this is a pitchcase:
+    <br/><br/>
+    <div id="pitches"></div>
+</body>
+</html>

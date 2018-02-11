@@ -1,0 +1,31 @@
+version: '2.1'
+services:
+
+  registry:
+    environment:
+      EUREKA_URL: http://192.168.99.100:8761
+    image: pitchcast/registry
+    ports:
+      - 8761:8761
+
+  gateway:
+    environment:
+      EUREKA_URL: http://192.168.99.100:8761
+    image: pitchcast/gateway
+    depends_on:
+      - registry
+    links:
+      - registry
+    ports:
+      - 8080:4000
+
+  pitching:
+    environment:
+      EUREKA_URL: http://192.168.99.100:8761
+    image: pitchcast/pitching
+    depends_on:
+      - registry
+    links:
+      - registry
+    ports:
+      - 4001:4001

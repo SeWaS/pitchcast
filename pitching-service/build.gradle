@@ -1,0 +1,103 @@
+group 'io'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'net.serenity-bdd.aggregator'
+
+sourceCompatibility = 1.8
+
+buildscript {
+    ext {
+        springBootVersion = '1.5.9.RELEASE'
+    }
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("net.serenity-bdd:serenity-gradle-plugin:1.8.21")
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
+}
+
+dependencyManagement {
+    imports {
+        mavenBom 'org.springframework.cloud:spring-cloud-dependencies:Edgware.SR2'
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile project(':support')
+    compile("org.springframework.boot:spring-boot-starter-web")
+    compile("org.springframework.cloud:spring-cloud-starter-eureka")
+    compile("org.springframework.boot:spring-boot-starter-data-jpa")
+    compile("com.h2database:h2")
+
+    testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-test'
+    testCompile group: 'io.github.benas', name: 'random-beans', version: '3.7.0'
+}
+
+/*-------------------------------
+    Defining sourcesets
+ -------------------------------*/
+
+sourceSets {
+    integrationTest {
+        java {
+            srcDir 'src/integrationtest/java'
+        }
+        resources {
+            srcDir 'src/integrationtest/resources'
+        }
+        compileClasspath += main.output + test.output
+        runtimeClasspath += main.output + test.output
+    }
+
+    acceptanceTest {
+        java {
+            srcDir 'src/acceptancetest/java'
+        }
+        resources {
+            srcDir 'src/acceptancetest/resources'
+        }
+        compileClasspath += main.output + test.output
+        runtimeClasspath += main.output + test.output    }
+}
+
+configurations {
+    integrationTestCompile.extendsFrom testCompile
+    integrationTestRuntime.extendsFrom testRuntime
+
+    acceptanceTestCompile.extendsFrom testCompile
+    acceptanceTestRuntime.extendsFrom testRuntime
+}
+
+gradle.startParameter.continueOnFailure = true
+
+task runUnitTests(type: Test) {
+
+    description = "Runs all unit tests for pitching-service"
+
+    group 'testing'
+
+    useJUnit {
+        excludeCategories 'io.pitchcast.support.testing.IntegrationTest'
+        excludeCategories 'io.pitchcast.support.testing.AcceptanceTest'
+    }
+}
+
+task runIntegrationTests(type: Test) {
+
+    description = "Runs all integration tests for pitching-service"
+
+    group 'testing'
+
+    useJUnit {
+        excludeCategories 'io.pitchcast.support.testing.AcceptanceTest'
+    }
+}
