@@ -3,6 +3,6 @@ jdk: oraclejdk8
 
 script:
   - gradle check
-  - gradle codeCoverageReport
+  - gradle jacocoTestReport
 after_success:
   - bash <(curl -s https://codecov.io/bash)
