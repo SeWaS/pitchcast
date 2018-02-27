@@ -101,7 +101,9 @@ task runIntegrationTests(type: Test) {
     }
 }
 
-jacoco {
-    toolVersion = "0.7.9"
-    reportsDir = file("$buildDir/coverage")
+jacocoTestReport {
+    reports {
+        xml.enabled true
+        html.enabled false
+    }
 }
