@@ -29,7 +29,7 @@ public class PitchServiceTest {
     private PitchesRepository pitchesRepository;
 
     @Test
-    public void shouldSavePitchesToMongoRepo() {
+    public void shouldSavePitchesToRepository() {
         Pitch pitch = new Pitch();
 
         Pitch mockPitch = new Pitch();

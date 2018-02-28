@@ -46,34 +46,29 @@ dependencies {
  -------------------------------*/
 
 sourceSets {
-    integrationTest {
-        java {
-            srcDir 'src/integrationtest/java'
-        }
-        resources {
-            srcDir 'src/integrationtest/resources'
-        }
-        compileClasspath += main.output + test.output
-        runtimeClasspath += main.output + test.output
+
+    test {
+        test.java.srcDir "src/test/java"
+        test.resources.srcDir "src/test/resources"
     }
 
-    acceptanceTest {
-        java {
-            srcDir 'src/acceptancetest/java'
-        }
-        resources {
-            srcDir 'src/acceptancetest/resources'
-        }
-        compileClasspath += main.output + test.output
-        runtimeClasspath += main.output + test.output    }
-}
+    main {
+        main.java.srcDir "src/main/java"
+        main.resources.srcDir "src/main/resources"
+    }
 
-configurations {
-    integrationTestCompile.extendsFrom testCompile
-    integrationTestRuntime.extendsFrom testRuntime
+    integration {
+        test.java.srcDir "src/integrationTest/java"
+        test.resources.srcDir "src/integrationTest/resources"
+        compileClasspath += sourceSets.test.runtimeClasspath
+    }
 
-    acceptanceTestCompile.extendsFrom testCompile
-    acceptanceTestRuntime.extendsFrom testRuntime
+    acceptance {
+        test.java.srcDir "src/acceptanceTest/java"
+        test.resources.srcDir "src/acceptanceTest/resources"
+        compileClasspath += sourceSets.test.runtimeClasspath
+    }
+
 }
 
 gradle.startParameter.continueOnFailure = true
@@ -97,7 +92,20 @@ task runIntegrationTests(type: Test) {
     group 'testing'
 
     useJUnit {
+        includeCategories 'io.pitchcast.support.testing.IntegrationTest'
         excludeCategories 'io.pitchcast.support.testing.AcceptanceTest'
+    }
+}
+
+task runAcceptanceTests(type: Test) {
+
+    description = "Runs all acceptance tests for pitching-service"
+
+    group 'testing'
+
+    useJUnit {
+        excludeCategories 'io.pitchcast.support.testing.IntegrationTest'
+        includeCategories 'io.pitchcast.support.testing.AcceptanceTest'
     }
 }
 
