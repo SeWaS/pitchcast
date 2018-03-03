@@ -11,3 +11,10 @@ eureka:
 spring:
   application:
     name: pitching-service
+  jpa:
+    hibernate:
+      ddl-auto: update
+  datasource:
+    url: jdbc:mysql://192.168.99.100:3306/exampledb
+    username: root
+    password: root

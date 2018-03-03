@@ -4,6 +4,7 @@ package io.pitchcast.pitchingservice.domain;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class Pitch {
@@ -12,9 +13,15 @@ public class Pitch {
     @GeneratedValue
     private Long pitchId;
 
+    @NotNull
     private int x;
+
+    @NotNull
     private int y;
+
+    @NotNull
     private PitchResult pitchResult;
+
     private PitchType pitchType;
 
     public Pitch() {
