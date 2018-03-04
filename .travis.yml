@@ -1,12 +1,20 @@
+sudo: required
+
 language: java
 jdk: oraclejdk8
 
-script:
-  - gradle check
-  - gradle jacocoTestReport
-
-after_success:
-  - bash <(curl -s https://codecov.io/bash)
-
 notifications:
   email: false
+
+services:
+  - docker
+
+jobs:
+  include:
+    - stage: Build
+      script:
+        - docker pull mysql
+        - docker run -p 1234:3306 --name mysql-test-db -e MYSQL_ROOT_PASSWORD=root -e MYSQL_DATABASE=testdb -d mysql:latest
+        - gradle check
+        - gradle jacocoTestReport
+        - bash <(curl -s https://codecov.io/bash)
