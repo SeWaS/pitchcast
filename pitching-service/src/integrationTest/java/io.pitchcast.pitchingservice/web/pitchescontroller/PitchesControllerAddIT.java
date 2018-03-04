@@ -1,8 +1,9 @@
-package io.pitchcast.pitchingservice.web;
+package io.pitchcast.pitchingservice.web.pitchescontroller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.pitchcast.pitchingservice.domain.Pitch;
 import io.pitchcast.pitchingservice.service.PitchesService;
+import io.pitchcast.pitchingservice.web.PitchesController;
 import io.pitchcast.pitchingservice.web.dto.PitchDto;
 import io.pitchcast.pitchingservice.web.dto.PitchResultDto;
 import io.pitchcast.pitchingservice.web.dto.PitchTypeDto;
@@ -32,7 +33,7 @@ import static io.github.benas.randombeans.api.EnhancedRandom.random;
 @Category(IntegrationTest.class)
 @RunWith(SpringRunner.class)
 @WebMvcTest(controllers = PitchesController.class)
-public class PitchesControllerIT {
+public class PitchesControllerAddIT {
 
     @Autowired
     private MockMvc mockMvc;
@@ -90,19 +91,18 @@ public class PitchesControllerIT {
     }
 
     @Test
-    public void shouldReturn200IfWantingAllPitches() throws Exception {
+    public void shouldReturn400IfPitchHasNotAllowedNullValues() throws Exception {
 
-        given(this.pitchesService.getAllPitches()).willReturn(Arrays.asList(
-                random(Pitch.class),
-                random(Pitch.class)
-        ));
+        PitchDto invalidPitch = new PitchDto();
+        invalidPitch.setX(10);
+        invalidPitch.setY(20);
+        invalidPitch.setPitchType(PitchTypeDto.FOURSEEM);
 
         mockMvc.perform(
-                MockMvcRequestBuilders.get("/pitches")
-                .accept(MediaType.APPLICATION_JSON)
-        ).andExpect(MockMvcResultMatchers.status().is(200));
-
-        verify(this.pitchesService, times(1)).getAllPitches();
+                MockMvcRequestBuilders.post("/add")
+                .contentType(MediaType.APPLICATION_JSON_UTF8)
+                .content(objectMapper.writeValueAsString(invalidPitch))
+        ).andExpect(MockMvcResultMatchers.status().is(400));
     }
 
 }
