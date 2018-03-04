@@ -3,6 +3,6 @@ spring:
     hibernate:
       ddl-auto: update
   datasource:
-    url: jdbc:mysql://192.168.99.100:3306/testdb?useSSL=false
+    url: jdbc:mysql://192.168.99.100:1234/testdb?useSSL=false
     username: root
     password: root
