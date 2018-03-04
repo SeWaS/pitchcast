@@ -25,7 +25,17 @@ services:
     image: pitchcast/pitching
     depends_on:
       - registry
+      - pitching-database
     links:
       - registry
     ports:
       - 4001:4001
+
+  pitching-database:
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: pitches
+    image: mysql
+    restart: always
+    ports:
+      - 3306:3306

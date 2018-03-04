@@ -1,9 +1,7 @@
 package io.pitchcast.pitchingservice.domain;
 
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Entity
@@ -20,8 +18,12 @@ public class Pitch {
     private int y;
 
     @NotNull
+    @Enumerated(EnumType.STRING)
+    @Column(length = 24)
     private PitchResult pitchResult;
 
+    @Enumerated(EnumType.STRING)
+    @Column(length = 24)
     private PitchType pitchType;
 
     public Pitch() {
