@@ -17,7 +17,4 @@ jobs:
         - docker run -p 1234:3306 --name mysql-test-db -e MYSQL_ROOT_PASSWORD=root -e MYSQL_DATABASE=testdb -d mysql:latest
         - gradle check
         - gradle jacocoTestReport
-
-    - stage: Report
-      script:
         - bash <(curl -s https://codecov.io/bash)
