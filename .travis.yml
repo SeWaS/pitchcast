@@ -15,7 +15,6 @@ jobs:
       script:
         - docker pull mysql
         - docker run -p 1234:3306 --name mysql-test-db -e MYSQL_ROOT_PASSWORD=root -e MYSQL_DATABASE=testdb -d mysql:latest
-        - docker-machine ip
 
     - stage: Build
       script:
