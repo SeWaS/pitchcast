@@ -11,13 +11,10 @@ services:
 
 jobs:
   include:
-    - stage: Prepare
+    - stage: Build
       script:
         - docker pull mysql
         - docker run -p 1234:3306 --name mysql-test-db -e MYSQL_ROOT_PASSWORD=root -e MYSQL_DATABASE=testdb -d mysql:latest
-
-    - stage: Build
-      script:
         - gradle check
         - gradle jacocoTestReport
 
