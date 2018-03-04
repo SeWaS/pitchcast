@@ -23,12 +23,10 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThatExceptionOf
 
 @Category(IntegrationTest.class)
 @RunWith(SpringRunner.class)
+@ActiveProfiles("mysql")
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 public class PitchesRepositoryIT {
-
-    @Autowired
-    private TestEntityManager testEntityManager;
 
     @Autowired
     private PitchesRepository repository;
