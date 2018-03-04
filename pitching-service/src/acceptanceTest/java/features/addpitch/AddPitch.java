@@ -41,7 +41,7 @@ public class AddPitch {
     }
 
     @Test
-    public void shouldReturnAllPitches() {
+    public void shouldAddValidPitch() {
         // given
         PitchDto pitch = EnhancedRandom.random(PitchDto.class);
 

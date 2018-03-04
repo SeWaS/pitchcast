@@ -1,11 +1,19 @@
 package io.pitchcast.pitchingservice.web.dto;
 
 
+import javax.validation.constraints.NotNull;
+
 public class PitchDto {
 
+    @NotNull
     private int x;
+
+    @NotNull
     private int y;
+
+    @NotNull
     private PitchResultDto pitchResult;
+
     private PitchTypeDto pitchType;
 
     public PitchDto() {
