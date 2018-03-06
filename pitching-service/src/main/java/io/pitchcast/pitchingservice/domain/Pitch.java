@@ -29,14 +29,6 @@ public class Pitch {
     public Pitch() {
     }
 
-    public Long getId() {
-        return pitchId;
-    }
-
-    public void setId(Long pitchId) {
-        this.pitchId = pitchId;
-    }
-
     public int getX() {
         return x;
     }

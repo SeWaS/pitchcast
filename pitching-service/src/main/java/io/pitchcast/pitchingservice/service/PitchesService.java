@@ -20,7 +20,7 @@ public class PitchesService {
     }
 
     public Long saveNewPitch(Pitch pitch) {
-        return pitchesRepository.save(pitch).getId();
+        return pitchesRepository.save(pitch).getPitchId();
     }
 
     public List<Pitch> getAllPitches() {
