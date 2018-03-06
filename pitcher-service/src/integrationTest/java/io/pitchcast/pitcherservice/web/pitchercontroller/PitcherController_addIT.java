@@ -1,9 +1,10 @@
-package io.pitchcast.pitcherservice.web;
+package io.pitchcast.pitcherservice.web.pitchercontroller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.github.benas.randombeans.api.EnhancedRandom;
 import io.pitchcast.pitcherservice.domain.Pitcher;
 import io.pitchcast.pitcherservice.service.PitcherService;
+import io.pitchcast.pitcherservice.web.PitcherController;
 import io.pitchcast.pitcherservice.web.dto.PitcherDto;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
@@ -25,7 +26,7 @@ import static org.mockito.Mockito.verify;
 
 @RunWith(SpringRunner.class)
 @WebMvcTest(controllers = PitcherController.class)
-public class PitcherControllerIT {
+public class PitcherController_addIT {
 
     @Autowired
     private MockMvc mockMvc;

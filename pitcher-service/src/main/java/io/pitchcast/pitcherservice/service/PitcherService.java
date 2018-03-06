@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Component
 @Transactional
 public class PitcherService {
@@ -19,5 +21,9 @@ public class PitcherService {
 
     public Long savePitcher(Pitcher pitcher) {
         return pitcherRepository.save(pitcher).getPitcherId();
+    }
+
+    public List<Pitcher> getAllPitcher() {
+        return pitcherRepository.findAll();
     }
 }

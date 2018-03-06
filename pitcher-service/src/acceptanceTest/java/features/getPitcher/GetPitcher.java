@@ -8,6 +8,7 @@ import io.pitchcast.pitcherservice.web.dto.PitcherDto;
 import io.pitchcast.pitcherservice.web.dto.PitchersDto;
 import io.pitchcast.support.testing.AcceptanceTest;
 import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.junit.runner.RunWith;
@@ -35,8 +36,8 @@ public class GetPitcher {
     @Autowired
     private PitcherRepository repository;
 
-    @After
-    public void tearDown() {
+    @Before
+    public void setUp() {
         repository.deleteAll();
     }
 

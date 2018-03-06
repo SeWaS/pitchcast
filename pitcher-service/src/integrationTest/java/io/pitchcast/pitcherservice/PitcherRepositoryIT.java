@@ -54,5 +54,4 @@ public class PitcherRepositoryIT {
                 () -> pitcherService.savePitcher(invalidPitcher)
         );
     }
-
 }
