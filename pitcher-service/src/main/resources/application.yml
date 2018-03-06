@@ -11,3 +11,10 @@ eureka:
 spring:
   application:
     name: pitcher-service
+  jpa:
+    hibernate:
+      ddl-auto: update
+  datasource:
+    url: jdbc:postgresql://localhost:5432/pitchers
+    username: root
+    password: root

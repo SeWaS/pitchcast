@@ -1,0 +1,9 @@
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: create
+  datasource:
+    url: jdbc:postgresql://127.0.0.1:5432/pitcher-test-db
+    driverClassName: org.postgresql.Driver
+    username: root
+    password: root

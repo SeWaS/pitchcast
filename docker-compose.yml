@@ -43,10 +43,21 @@ services:
   pitcher:
     environment:
       EUREKA_URL: http://192.168.99.100:8761
-    image: pitchcast/pitching
+    image: pitchcast/pitcher
     depends_on:
       - registry
+      - pitcher-database
     links:
       - registry
     ports:
       - 4002:4002
+
+  pitcher-database:
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: pitchers
+    image: postgres
+    restart: always
+    ports:
+      - 5432:5432
