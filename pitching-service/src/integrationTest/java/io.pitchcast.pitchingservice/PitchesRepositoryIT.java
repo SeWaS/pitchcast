@@ -1,4 +1,4 @@
-package io.pitchcast.pitchingservice.web;
+package io.pitchcast.pitchingservice;
 
 import io.github.benas.randombeans.api.EnhancedRandom;
 import io.pitchcast.pitchingservice.domain.Pitch;
