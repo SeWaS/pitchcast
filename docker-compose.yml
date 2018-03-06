@@ -39,3 +39,14 @@ services:
     restart: always
     ports:
       - 3306:3306
+
+  pitcher:
+    environment:
+      EUREKA_URL: http://192.168.99.100:8761
+    image: pitchcast/pitching
+    depends_on:
+      - registry
+    links:
+      - registry
+    ports:
+      - 4002:4002
