@@ -75,42 +75,6 @@ sourceSets {
 
 gradle.startParameter.continueOnFailure = true
 
-task runUnitTests(type: Test) {
-
-    description = "Runs all unit tests for pitching-service"
-
-    group 'testing'
-
-    useJUnit {
-        excludeCategories 'io.pitchcast.support.testing.IntegrationTest'
-        excludeCategories 'io.pitchcast.support.testing.AcceptanceTest'
-    }
-}
-
-task runIntegrationTests(type: Test) {
-
-    description = "Runs all integration tests for pitching-service"
-
-    group 'testing'
-
-    useJUnit {
-        includeCategories 'io.pitchcast.support.testing.IntegrationTest'
-        excludeCategories 'io.pitchcast.support.testing.AcceptanceTest'
-    }
-}
-
-task runAcceptanceTests(type: Test) {
-
-    description = "Runs all acceptance tests for pitching-service"
-
-    group 'testing'
-
-    useJUnit {
-        excludeCategories 'io.pitchcast.support.testing.IntegrationTest'
-        includeCategories 'io.pitchcast.support.testing.AcceptanceTest'
-    }
-}
-
 jacocoTestReport {
     reports {
         xml.enabled true

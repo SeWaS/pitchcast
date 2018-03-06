@@ -42,3 +42,44 @@ dependencies {
     testCompile group: 'io.github.benas', name: 'random-beans', version: '3.7.0'
     testCompile group: 'org.assertj', name: 'assertj-core', version: '3.9.0'
 }
+
+gradle.startParameter.continueOnFailure = true
+
+/*-------------------------------
+    Defining sourcesets
+ -------------------------------*/
+
+sourceSets {
+
+    test {
+        test.java.srcDir "src/test/java"
+        test.resources.srcDir "src/test/resources"
+    }
+
+    main {
+        main.java.srcDir "src/main/java"
+        main.resources.srcDir "src/main/resources"
+    }
+
+    integration {
+        test.java.srcDir "src/integrationTest/java"
+        test.resources.srcDir "src/integrationTest/resources"
+        compileClasspath += sourceSets.test.runtimeClasspath
+    }
+
+    acceptance {
+        test.java.srcDir "src/acceptanceTest/java"
+        test.resources.srcDir "src/acceptanceTest/resources"
+        compileClasspath += sourceSets.test.runtimeClasspath
+    }
+
+}
+
+jacocoTestReport {
+    reports {
+        xml.enabled true
+        html.enabled false
+    }
+}
+
+check.dependsOn jacocoTestReport
