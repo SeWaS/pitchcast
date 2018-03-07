@@ -36,12 +36,14 @@ dependencies {
     compile("org.springframework.cloud:spring-cloud-starter-eureka")
     compile("org.springframework.boot:spring-boot-starter-data-jpa")
     compile("com.h2database:h2")
-    compile 'mysql:mysql-connector-java'
+    compile('org.postgresql:postgresql:42.2.1')
 
     testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-test'
     testCompile group: 'io.github.benas', name: 'random-beans', version: '3.7.0'
     testCompile group: 'org.assertj', name: 'assertj-core', version: '3.9.0'
 }
+
+gradle.startParameter.continueOnFailure = true
 
 /*-------------------------------
     Defining sourcesets
@@ -72,8 +74,6 @@ sourceSets {
     }
 
 }
-
-gradle.startParameter.continueOnFailure = true
 
 jacocoTestReport {
     reports {

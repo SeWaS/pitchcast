@@ -3,14 +3,16 @@ services:
 
   registry:
     environment:
-      EUREKA_URL: http://192.168.99.100:8761
+      EUREKA_URL: http://192.168.99.100
+      EUREKA_PORT: 8761
     image: pitchcast/registry
     ports:
       - 8761:8761
 
   gateway:
     environment:
-      EUREKA_URL: http://192.168.99.100:8761
+      EUREKA_URL: http://192.168.99.100
+      EUREKA_PORT: 8761
     image: pitchcast/gateway
     depends_on:
       - registry
@@ -21,7 +23,8 @@ services:
 
   pitching:
     environment:
-      EUREKA_URL: http://192.168.99.100:8761
+      EUREKA_URL: http://192.168.99.100
+      EUREKA_PORT: 8761
     image: pitchcast/pitching
     depends_on:
       - registry
@@ -39,3 +42,26 @@ services:
     restart: always
     ports:
       - 3306:3306
+
+  pitcher:
+    environment:
+      EUREKA_URL: http://192.168.99.100
+      EUREKA_PORT: 8761
+    image: pitchcast/pitcher
+    depends_on:
+      - registry
+      - pitcher-database
+    links:
+      - registry
+    ports:
+      - 4002:4002
+
+  pitcher-database:
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: pitchers
+    image: postgres
+    restart: always
+    ports:
+      - 5432:5432

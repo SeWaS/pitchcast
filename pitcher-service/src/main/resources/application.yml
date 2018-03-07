@@ -1,5 +1,5 @@
 server:
-  port: 3000
+  port: 3001
 
 eureka:
   client:
@@ -10,11 +10,11 @@ eureka:
 
 spring:
   application:
-    name: pitching-service
+    name: pitcher-service
   jpa:
     hibernate:
       ddl-auto: update
   datasource:
-    url: jdbc:mysql://192.168.99.100:3306/pitches
+    url: jdbc:postgresql://localhost:5432/pitchers
     username: root
     password: root
