@@ -13,6 +13,12 @@ public class Pitcher {
     @NotNull
     private String name;
 
+    @NotNull
+    @Enumerated(EnumType.STRING)
+    private PitcherHand handed;
+
+    private String description;
+
     public Pitcher() {}
 
     public Long getPitcherId() {
@@ -29,5 +35,21 @@ public class Pitcher {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public PitcherHand getHanded() {
+        return handed;
+    }
+
+    public void setHanded(PitcherHand handed) {
+        this.handed = handed;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }
