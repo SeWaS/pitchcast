@@ -55,7 +55,8 @@ public class PitcherController_addIT {
 
         Pitcher sentPitcher = pitcherArgumentCaptor.getValue();
 
-        assertThat(sentPitcher).isEqualToIgnoringGivenFields(validPitcher, "pitcherId");
+        assertThat(sentPitcher).isEqualToIgnoringGivenFields(validPitcher, "pitcherId", "handed");
+        assertThat(sentPitcher.getHanded().name()).isEqualTo(validPitcher.getHanded().name());
 
     }
 

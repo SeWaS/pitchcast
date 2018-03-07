@@ -43,7 +43,8 @@ public class AddPitcher {
         assertThat(addPitcherResponse.getStatusCodeValue()).isEqualTo(201);
 
         Pitcher storedPitcher = repository.findOne(addPitcherResponse.getBody());
-        assertThat(storedPitcher).isEqualToIgnoringGivenFields(newPitcher, "pitcherId");
+        assertThat(storedPitcher).isEqualToIgnoringGivenFields(newPitcher, "pitcherId", "handed");
+        assertThat(storedPitcher.getHanded().name()).isEqualTo(newPitcher.getHanded().name());
     }
 
 }
