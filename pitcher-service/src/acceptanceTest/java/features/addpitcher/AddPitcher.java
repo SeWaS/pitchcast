@@ -1,4 +1,4 @@
-package features.addPitcher;
+package features.addpitcher;
 
 import io.github.benas.randombeans.api.EnhancedRandom;
 import io.pitchcast.pitcherservice.PitcherServiceApp;

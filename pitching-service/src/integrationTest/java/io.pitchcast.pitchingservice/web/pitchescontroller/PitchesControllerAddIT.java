@@ -21,14 +21,10 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
-import java.util.Arrays;
-
 import static org.assertj.core.api.Java6Assertions.assertThat;
-import static org.mockito.BDDMockito.given;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
-import static io.github.benas.randombeans.api.EnhancedRandom.random;
 
 @Category(IntegrationTest.class)
 @RunWith(SpringRunner.class)
