@@ -32,9 +32,6 @@ public class PitcherRepositoryIT {
     @Autowired
     private PitcherRepository repository;
 
-    @Autowired
-    private TestEntityManager testEntityManager;
-
     @Test
     public void shouldSaveValidPitcher() {
         // given
@@ -57,7 +54,6 @@ public class PitcherRepositoryIT {
         assertThatExceptionOfType(ConstraintViolationException.class).isThrownBy(
                 () -> {
                     pitcherService.savePitcher(invalidPitcher);
-                    repository.flush();
                 }
         );
     }
