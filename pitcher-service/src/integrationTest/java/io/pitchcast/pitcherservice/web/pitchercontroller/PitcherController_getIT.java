@@ -1,6 +1,5 @@
 package io.pitchcast.pitcherservice.web.pitchercontroller;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import io.pitchcast.pitcherservice.domain.Pitcher;
 import io.pitchcast.pitcherservice.service.PitcherService;
 import io.pitchcast.pitcherservice.web.PitcherController;
