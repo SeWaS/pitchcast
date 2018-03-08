@@ -21,7 +21,7 @@ public class PitcherService {
     }
 
     public Long savePitcher(Pitcher pitcher) {
-        return pitcherRepository.save(pitcher).getPitcherId();
+        return pitcherRepository.saveAndFlush(pitcher).getPitcherId();
     }
 
     public List<Pitcher> getAllPitcher() {
