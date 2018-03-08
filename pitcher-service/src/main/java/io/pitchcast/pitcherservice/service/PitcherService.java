@@ -3,7 +3,6 @@ package io.pitchcast.pitcherservice.service;
 import io.pitchcast.pitcherservice.domain.Pitcher;
 import io.pitchcast.pitcherservice.domain.repository.PitcherRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

@@ -7,7 +7,6 @@ import io.pitchcast.pitcherservice.service.PitcherService;
 import io.pitchcast.pitcherservice.web.PitcherController;
 import io.pitchcast.pitcherservice.web.dto.PitcherDto;
 import org.junit.Test;
-import org.junit.experimental.categories.Category;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
 import org.springframework.beans.factory.annotation.Autowired;

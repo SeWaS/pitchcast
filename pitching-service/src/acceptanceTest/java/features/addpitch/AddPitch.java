@@ -5,7 +5,6 @@ import io.pitchcast.pitchingservice.PitchingServiceApp;
 import io.pitchcast.pitchingservice.domain.Pitch;
 import io.pitchcast.pitchingservice.domain.repository.PitchesRepository;
 import io.pitchcast.pitchingservice.web.dto.PitchDto;
-import io.pitchcast.pitchingservice.web.dto.PitchesDto;
 import io.pitchcast.support.testing.AcceptanceTest;
 import org.junit.After;
 import org.junit.Test;
@@ -16,8 +15,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
-
-import java.util.List;
 
 import static org.assertj.core.api.Java6Assertions.assertThat;
 

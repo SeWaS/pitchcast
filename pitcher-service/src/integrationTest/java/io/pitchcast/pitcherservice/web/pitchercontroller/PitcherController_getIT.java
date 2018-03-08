@@ -1,14 +1,11 @@
 package io.pitchcast.pitcherservice.web.pitchercontroller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import io.github.benas.randombeans.api.EnhancedRandom;
 import io.pitchcast.pitcherservice.domain.Pitcher;
 import io.pitchcast.pitcherservice.service.PitcherService;
 import io.pitchcast.pitcherservice.web.PitcherController;
-import io.pitchcast.pitcherservice.web.dto.PitcherDto;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.ArgumentCaptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -21,9 +18,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import java.util.Arrays;
 
 import static io.github.benas.randombeans.api.EnhancedRandom.random;
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
