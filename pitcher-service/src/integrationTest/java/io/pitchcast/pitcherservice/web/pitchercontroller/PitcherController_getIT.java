@@ -29,9 +29,6 @@ public class PitcherController_getIT {
     @Autowired
     private MockMvc mockMvc;
 
-    @Autowired
-    private ObjectMapper objectMapper;
-
     @MockBean
     private PitcherService pitcherService;
 

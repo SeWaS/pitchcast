@@ -1,12 +1,11 @@
-package features.getPitcher;
+package features.addpitcher;
 
 import io.github.benas.randombeans.api.EnhancedRandom;
 import io.pitchcast.pitcherservice.PitcherServiceApp;
 import io.pitchcast.pitcherservice.domain.Pitcher;
 import io.pitchcast.pitcherservice.domain.repository.PitcherRepository;
-import io.pitchcast.pitcherservice.web.dto.PitchersDto;
+import io.pitchcast.pitcherservice.web.dto.PitcherDto;
 import io.pitchcast.support.testing.AcceptanceTest;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.junit.runner.RunWith;
@@ -16,9 +15,7 @@ import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.util.List;
-
-import static org.assertj.core.api.Java6Assertions.assertThat;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 @Category(AcceptanceTest.class)
 @RunWith(SpringRunner.class)
@@ -26,7 +23,7 @@ import static org.assertj.core.api.Java6Assertions.assertThat;
         webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
         classes = PitcherServiceApp.class
 )
-public class GetPitcher {
+public class AddPitcher {
 
     @Autowired
     private TestRestTemplate testRestTemplate;
@@ -34,24 +31,20 @@ public class GetPitcher {
     @Autowired
     private PitcherRepository repository;
 
-    @Before
-    public void setUp() {
-        repository.deleteAll();
-    }
-
     @Test
-    public void shouldReturnAllPitchers() {
+    public void shouldAddPitcher() {
         // given
-        List<Pitcher> testPitches = EnhancedRandom.randomListOf(3, Pitcher.class);
-        repository.save(testPitches);
-        repository.flush();
+        PitcherDto newPitcher = EnhancedRandom.random(PitcherDto.class);
 
         // when
-        ResponseEntity<PitchersDto> getPitchesResponse = testRestTemplate.getForEntity("/pitcher/get", PitchersDto.class);
+        ResponseEntity<Long> addPitcherResponse = testRestTemplate.postForEntity("/pitcher/add", newPitcher, Long.class);
 
         // then
-        assertThat(getPitchesResponse.getStatusCodeValue()).isEqualTo(200);
-        assertThat(getPitchesResponse.getBody().getPitchers()).hasSize(3);
+        assertThat(addPitcherResponse.getStatusCodeValue()).isEqualTo(201);
+
+        Pitcher storedPitcher = repository.findOne(addPitcherResponse.getBody());
+        assertThat(storedPitcher).isEqualToIgnoringGivenFields(newPitcher, "pitcherId", "handed");
+        assertThat(storedPitcher.getHanded().name()).isEqualTo(newPitcher.getHanded().name());
     }
 
 }
