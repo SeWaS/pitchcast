@@ -26,4 +26,8 @@ public class PitchesService {
     public List<Pitch> getAllPitches() {
         return pitchesRepository.findAll();
     }
+
+    public List<Pitch> getPitchesByPitcher(long pitcherId) {
+        return pitchesRepository.findByPitcherId(pitcherId);
+    }
 }
