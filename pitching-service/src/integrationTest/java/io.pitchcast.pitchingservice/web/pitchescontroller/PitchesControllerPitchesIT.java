@@ -21,6 +21,7 @@ import java.util.Arrays;
 
 import static io.github.benas.randombeans.api.EnhancedRandom.random;
 import static org.mockito.BDDMockito.given;
+import static org.mockito.Matchers.anyLong;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
