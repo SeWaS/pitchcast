@@ -45,7 +45,7 @@ public class PitcherController_addIT {
 
         // then
         mockMvc.perform(
-                MockMvcRequestBuilders.post("/pitcher/add")
+                MockMvcRequestBuilders.post("/pitcher/")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(validPitcher))
         ).andExpect(MockMvcResultMatchers.status().is(201));
@@ -66,7 +66,7 @@ public class PitcherController_addIT {
 
         // then
         mockMvc.perform(
-                MockMvcRequestBuilders.post("/pitcher/add")
+                MockMvcRequestBuilders.post("/pitcher/")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(validPitcher))
         ).andExpect(MockMvcResultMatchers.status().is(400));

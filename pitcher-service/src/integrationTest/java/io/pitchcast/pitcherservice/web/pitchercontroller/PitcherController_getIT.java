@@ -40,7 +40,7 @@ public class PitcherController_getIT {
         ));
 
         mockMvc.perform(
-                MockMvcRequestBuilders.get("/pitcher/get")
+                MockMvcRequestBuilders.get("/pitcher/")
                 .contentType(MediaType.APPLICATION_JSON)
         ).andExpect(MockMvcResultMatchers.status().is(200));
 
