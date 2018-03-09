@@ -21,12 +21,12 @@ public class PitcherController {
         this.pitcherService = pitcherService;
     }
 
-    @PostMapping("/add")
+    @PostMapping("/")
     public ResponseEntity<Long> addNewPitcher(@RequestBody @Validated PitcherDto pitcher) {
         return new ResponseEntity(pitcherService.savePitcher(DtoTransformer.pitcherDtoToPitcher(pitcher)), HttpStatus.CREATED);
     }
 
-    @GetMapping("/get")
+    @GetMapping("/")
     public ResponseEntity<PitchersDto> getAllPitcher() {
         PitchersDto receivedPitchers = new PitchersDto();
         receivedPitchers.setPitchers(DtoTransformer.listOfPitcherToListOfPitcherDto(pitcherService.getAllPitcher()));

@@ -1,5 +1,6 @@
 package io.pitchcast.pitchingservice.web.pitchescontroller;
 
+import io.github.benas.randombeans.api.EnhancedRandom;
 import io.pitchcast.pitchingservice.domain.Pitch;
 import io.pitchcast.pitchingservice.service.PitchesService;
 import io.pitchcast.pitchingservice.web.PitchesController;
@@ -43,11 +44,25 @@ public class PitchesControllerPitchesIT {
         ));
 
         mockMvc.perform(
-                MockMvcRequestBuilders.get("/pitches")
+                MockMvcRequestBuilders.get("/pitches/")
                 .accept(MediaType.APPLICATION_JSON)
         ).andExpect(MockMvcResultMatchers.status().is(200));
 
         verify(this.pitchesService, times(1)).getAllPitches();
+    }
+
+    @Test
+    public void shouldReturn200IfWantingPitchesByPitcherId() throws Exception {
+
+        given(this.pitchesService.getPitchesByPitcher(12345L)).willReturn(EnhancedRandom.randomListOf(3, Pitch.class));
+
+        mockMvc.perform(
+                MockMvcRequestBuilders.get("/pitches/12345")
+                        .accept(MediaType.APPLICATION_JSON)
+        ).andExpect(MockMvcResultMatchers.status().is(200));
+
+        verify(this.pitchesService, times(1)).getPitchesByPitcher(12345L);
+
     }
 
 }

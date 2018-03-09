@@ -47,7 +47,7 @@ public class GetPitcher {
         repository.flush();
 
         // when
-        ResponseEntity<PitchersDto> getPitchesResponse = testRestTemplate.getForEntity("/pitcher/get", PitchersDto.class);
+        ResponseEntity<PitchersDto> getPitchesResponse = testRestTemplate.getForEntity("/pitcher/", PitchersDto.class);
 
         // then
         assertThat(getPitchesResponse.getStatusCodeValue()).isEqualTo(200);

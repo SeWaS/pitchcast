@@ -16,6 +16,12 @@ public class PitchDto {
 
     private PitchTypeDto pitchType;
 
+    @NotNull
+    private String pitcherName;
+
+    @NotNull
+    private Long pitcherId;
+
     public PitchDto() {
     }
 
@@ -49,5 +55,21 @@ public class PitchDto {
 
     public void setPitchType(PitchTypeDto pitchType) {
         this.pitchType = pitchType;
+    }
+
+    public String getPitcherName() {
+        return pitcherName;
+    }
+
+    public void setPitcherName(String pitcherName) {
+        this.pitcherName = pitcherName;
+    }
+
+    public Long getPitcherId() {
+        return pitcherId;
+    }
+
+    public void setPitcherId(Long pitcherId) {
+        this.pitcherId = pitcherId;
     }
 }

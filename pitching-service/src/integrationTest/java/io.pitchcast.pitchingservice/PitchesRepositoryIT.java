@@ -2,6 +2,7 @@ package io.pitchcast.pitchingservice;
 
 import io.github.benas.randombeans.api.EnhancedRandom;
 import io.pitchcast.pitchingservice.domain.Pitch;
+import io.pitchcast.pitchingservice.domain.repository.PitchesRepository;
 import io.pitchcast.pitchingservice.service.PitchesService;
 import io.pitchcast.support.testing.IntegrationTest;
 import org.junit.Test;
@@ -15,6 +16,8 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.validation.ConstraintViolationException;
+
+import java.util.List;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatExceptionOfType;
@@ -30,6 +33,9 @@ public class PitchesRepositoryIT {
 
     @Autowired
     private PitchesService pitchesService;
+
+    @Autowired
+    private PitchesRepository pitchesRepository;
 
     @Test
     public void shouldStoreValidPitchCorrectly() {
@@ -47,7 +53,7 @@ public class PitchesRepositoryIT {
     }
 
     @Test
-    public void shouldNotStoreInalidPitchCorrectly() {
+    public void shouldNotStoreInvalidPitchCorrectly() {
         // given
         Pitch invalidPitch = new Pitch();
 
@@ -55,6 +61,32 @@ public class PitchesRepositoryIT {
         assertThatExceptionOfType(ConstraintViolationException.class).isThrownBy(
                 () -> pitchesService.saveNewPitch(invalidPitch)
         );
+    }
+
+    @Test
+    public void shouldFindPitchesByPitcherId() {
+        // given
+        final Long PITCHER_ID = 9876L;
+
+        Pitch pitch1 = EnhancedRandom.random(Pitch.class);
+        pitchesRepository.saveAndFlush(pitch1);
+
+        Pitch pitch2 = EnhancedRandom.random(Pitch.class);
+        pitchesRepository.saveAndFlush(pitch2);
+
+        Pitch pitch3 = EnhancedRandom.random(Pitch.class);
+        pitch3.setPitcherId(PITCHER_ID);
+        pitchesRepository.saveAndFlush(pitch3);
+
+        Pitch pitch4 = EnhancedRandom.random(Pitch.class);
+        pitch4.setPitcherId(PITCHER_ID);
+        pitchesRepository.saveAndFlush(pitch4);
+
+        // when
+        List<Pitch> foundPitches = this.pitchesService.getPitchesByPitcher(PITCHER_ID);
+
+        // then
+        assertThat(foundPitches.size()).isEqualTo(2);
     }
 
 }

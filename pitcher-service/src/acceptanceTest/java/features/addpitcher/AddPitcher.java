@@ -37,7 +37,7 @@ public class AddPitcher {
         PitcherDto newPitcher = EnhancedRandom.random(PitcherDto.class);
 
         // when
-        ResponseEntity<Long> addPitcherResponse = testRestTemplate.postForEntity("/pitcher/add", newPitcher, Long.class);
+        ResponseEntity<Long> addPitcherResponse = testRestTemplate.postForEntity("/pitcher/", newPitcher, Long.class);
 
         // then
         assertThat(addPitcherResponse.getStatusCodeValue()).isEqualTo(201);

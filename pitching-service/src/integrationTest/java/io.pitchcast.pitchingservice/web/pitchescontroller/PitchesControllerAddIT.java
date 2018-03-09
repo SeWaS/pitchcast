@@ -1,11 +1,11 @@
 package io.pitchcast.pitchingservice.web.pitchescontroller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import io.github.benas.randombeans.api.EnhancedRandom;
 import io.pitchcast.pitchingservice.domain.Pitch;
 import io.pitchcast.pitchingservice.service.PitchesService;
 import io.pitchcast.pitchingservice.web.PitchesController;
 import io.pitchcast.pitchingservice.web.dto.PitchDto;
-import io.pitchcast.pitchingservice.web.dto.PitchResultDto;
 import io.pitchcast.pitchingservice.web.dto.PitchTypeDto;
 import io.pitchcast.support.testing.IntegrationTest;
 import org.junit.Test;
@@ -45,14 +45,10 @@ public class PitchesControllerAddIT {
 
         ArgumentCaptor<Pitch> pitchArgumentCaptor = ArgumentCaptor.forClass(Pitch.class);
 
-        PitchDto validPitch = new PitchDto();
-        validPitch.setX(10);
-        validPitch.setY(20);
-        validPitch.setPitchResult(PitchResultDto.STRIKE);
-        validPitch.setPitchType(PitchTypeDto.FOURSEEM);
+        PitchDto validPitch = EnhancedRandom.random(PitchDto.class);
 
         mockMvc.perform(
-                MockMvcRequestBuilders.post("/add")
+                MockMvcRequestBuilders.post("/pitches/")
                 .contentType(MediaType.APPLICATION_JSON_UTF8)
                 .content(objectMapper.writeValueAsString(validPitch))
         ).andExpect(MockMvcResultMatchers.status().is(201));
@@ -67,7 +63,7 @@ public class PitchesControllerAddIT {
     @Test
     public void shouldReturn400IfNoPitchWasSent() throws Exception {
         mockMvc.perform(
-                MockMvcRequestBuilders.post("/add")
+                MockMvcRequestBuilders.post("/pitches/")
                         .contentType(MediaType.APPLICATION_JSON_UTF8)
                         .content("")
         ).andExpect(MockMvcResultMatchers.status().is(400));
@@ -78,7 +74,7 @@ public class PitchesControllerAddIT {
     @Test
     public void shouldReturn400IfEmptyPitchWasSent() throws Exception {
         mockMvc.perform(
-                MockMvcRequestBuilders.post("/add")
+                MockMvcRequestBuilders.post("/pitches/")
                         .contentType(MediaType.APPLICATION_JSON_UTF8)
                         .content(objectMapper.writeValueAsString(""))
         ).andExpect(MockMvcResultMatchers.status().is(400));
@@ -95,7 +91,7 @@ public class PitchesControllerAddIT {
         invalidPitch.setPitchType(PitchTypeDto.FOURSEEM);
 
         mockMvc.perform(
-                MockMvcRequestBuilders.post("/add")
+                MockMvcRequestBuilders.post("/pitches/")
                 .contentType(MediaType.APPLICATION_JSON_UTF8)
                 .content(objectMapper.writeValueAsString(invalidPitch))
         ).andExpect(MockMvcResultMatchers.status().is(400));

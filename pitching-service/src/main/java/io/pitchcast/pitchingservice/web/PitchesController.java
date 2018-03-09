@@ -7,12 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequestMapping("/pitches")
 public class PitchesController {
 
     private PitchesService pitchesService;
@@ -22,15 +20,22 @@ public class PitchesController {
         this.pitchesService = pitchesService;
     }
 
-    @PostMapping("/add")
+    @PostMapping("/")
     public ResponseEntity<Long> addNewPitch(@RequestBody @Validated PitchDto pitchDto) {
         return new ResponseEntity(pitchesService.saveNewPitch(DtoTransformer.pitchDtoToPitch(pitchDto)), HttpStatus.CREATED);
     }
 
-    @GetMapping("/pitches")
+    @GetMapping("/")
     public ResponseEntity<PitchesDto> getAllPitches() {
         PitchesDto receivedPitches = new PitchesDto();
         receivedPitches.setPitches(DtoTransformer.listOfPitchToListOfPitchDto(pitchesService.getAllPitches()));
+        return ResponseEntity.ok(receivedPitches);
+    }
+
+    @GetMapping("/{pitcherId}")
+    public ResponseEntity<PitchesDto> getPitcherByPitcher(@PathVariable(name = "pitcherId") Long pitcherId) {
+        PitchesDto receivedPitches = new PitchesDto();
+        receivedPitches.setPitches(DtoTransformer.listOfPitchToListOfPitchDto(pitchesService.getPitchesByPitcher(pitcherId)));
         return ResponseEntity.ok(receivedPitches);
     }
 

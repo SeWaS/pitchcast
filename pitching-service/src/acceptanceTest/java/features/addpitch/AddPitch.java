@@ -43,7 +43,7 @@ public class AddPitch {
         PitchDto pitch = EnhancedRandom.random(PitchDto.class);
 
         // when
-        ResponseEntity<Long> getPitchesResponse = testRestTemplate.postForEntity("/add", pitch, Long.class);
+        ResponseEntity<Long> getPitchesResponse = testRestTemplate.postForEntity("/pitches/", pitch, Long.class);
 
         // then
         assertThat(getPitchesResponse.getStatusCodeValue()).isEqualTo(201);

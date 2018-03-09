@@ -26,6 +26,12 @@ public class Pitch {
     @Column(length = 24)
     private PitchType pitchType;
 
+    @NotNull
+    private String pitcherName;
+
+    @NotNull
+    private Long pitcherId;
+
     public Pitch() {
     }
 
@@ -67,5 +73,21 @@ public class Pitch {
 
     public void setPitchType(PitchType pitchType) {
         this.pitchType = pitchType;
+    }
+
+    public String getPitcherName() {
+        return pitcherName;
+    }
+
+    public void setPitcherName(String pitcherName) {
+        this.pitcherName = pitcherName;
+    }
+
+    public Long getPitcherId() {
+        return pitcherId;
+    }
+
+    public void setPitcherId(Long pitcherId) {
+        this.pitcherId = pitcherId;
     }
 }
