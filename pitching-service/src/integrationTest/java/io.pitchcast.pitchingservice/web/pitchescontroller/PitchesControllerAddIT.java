@@ -6,7 +6,6 @@ import io.pitchcast.pitchingservice.domain.Pitch;
 import io.pitchcast.pitchingservice.service.PitchesService;
 import io.pitchcast.pitchingservice.web.PitchesController;
 import io.pitchcast.pitchingservice.web.dto.PitchDto;
-import io.pitchcast.pitchingservice.web.dto.PitchResultDto;
 import io.pitchcast.pitchingservice.web.dto.PitchTypeDto;
 import io.pitchcast.support.testing.IntegrationTest;
 import org.junit.Test;
