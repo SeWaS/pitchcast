@@ -9,9 +9,6 @@ notifications:
 services:
   - docker
 
-install:
-  - ./gradlew assemble
-
 jobs:
   include:
     - stage: Build
