@@ -5,23 +5,20 @@ import io.pitchcast.pitcherservice.PitcherServiceApp;
 import io.pitchcast.pitcherservice.domain.Pitcher;
 import io.pitchcast.pitcherservice.domain.repository.PitcherRepository;
 import io.pitchcast.pitcherservice.web.dto.PitchersDto;
-import io.pitchcast.support.testing.AcceptanceTest;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.experimental.categories.Category;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.ResponseEntity;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.List;
 
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
-@Category(AcceptanceTest.class)
-@RunWith(SpringRunner.class)
+@ExtendWith(SpringExtension.class)
 @SpringBootTest(
         webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
         classes = PitcherServiceApp.class
@@ -34,7 +31,7 @@ public class GetPitcher {
     @Autowired
     private PitcherRepository repository;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         repository.deleteAll();
     }
@@ -43,7 +40,7 @@ public class GetPitcher {
     public void shouldReturnAllPitchers() {
         // given
         List<Pitcher> testPitches = EnhancedRandom.randomListOf(3, Pitcher.class);
-        repository.save(testPitches);
+        repository.saveAll(testPitches);
         repository.flush();
 
         // when
