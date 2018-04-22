@@ -27,7 +27,4 @@ build/
 bin/
 .gradle
 /target/site/serenity/
-/gradle/
-/gradlew
-/gradlew.bat
 out/
