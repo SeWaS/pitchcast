@@ -9,12 +9,15 @@ notifications:
 services:
   - docker
 
+before_install:
+  - chmod +x gradlew
+
 jobs:
   include:
     - stage: Build
       script:
         - docker run -p 1234:3306 --name mysql-test-db -e MYSQL_ROOT_PASSWORD=root -e MYSQL_DATABASE=testdb -d mysql:latest
         - docker run -p 1235:5432 --name postgres-test-db -e POSTGRES_PASSWORD=root -e POSTGRES_DB=pitcher-test-db -e POSTGRES_USER=root -d postgres:latest
-        - gradle check
-        - gradle jacocoTestReport
+        - ./gradlew check
+        - ./gradlew jacocoTestReport
         - bash <(curl -s https://codecov.io/bash)
