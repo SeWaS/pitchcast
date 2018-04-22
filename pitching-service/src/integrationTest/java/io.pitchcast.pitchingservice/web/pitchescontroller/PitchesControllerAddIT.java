@@ -7,7 +7,6 @@ import io.pitchcast.pitchingservice.service.PitchesService;
 import io.pitchcast.pitchingservice.web.PitchesController;
 import io.pitchcast.pitchingservice.web.dto.PitchDto;
 import io.pitchcast.pitchingservice.web.dto.PitchTypeDto;
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
@@ -21,7 +20,8 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import static org.assertj.core.api.Java6Assertions.assertThat;
-import static org.mockito.Matchers.any;
+
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
