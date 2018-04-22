@@ -9,8 +9,9 @@ notifications:
 services:
   - docker
 
-before_all:
+install:
   - gradle wrapper
+  - ./gradlew assemble
 
 jobs:
   include:
