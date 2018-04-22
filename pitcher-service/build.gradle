@@ -4,16 +4,17 @@ version '1.0-SNAPSHOT'
 apply plugin: 'java'
 apply plugin: 'idea'
 apply plugin: "jacoco"
-apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
 
 sourceCompatibility = 1.8
 
 buildscript {
     ext {
-        springBootVersion = '1.5.9.RELEASE'
+        springBootVersion = '2.0.0.RELEASE'
     }
     repositories {
         mavenCentral()
+        maven { url "https://repo.spring.io/milestone" }
     }
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
@@ -22,18 +23,20 @@ buildscript {
 
 dependencyManagement {
     imports {
-        mavenBom 'org.springframework.cloud:spring-cloud-dependencies:Edgware.SR2'
+        mavenBom 'org.springframework.boot:spring-boot-dependencies:2.0.0.RELEASE'
+        mavenBom 'org.springframework.cloud:spring-cloud-dependencies:Finchley.M8'
     }
 }
 
 repositories {
     mavenCentral()
+    maven { url "https://repo.spring.io/milestone" }
 }
 
 dependencies {
     compile project(':support')
     compile("org.springframework.boot:spring-boot-starter-web")
-    compile("org.springframework.cloud:spring-cloud-starter-eureka")
+    compile 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
     compile("org.springframework.boot:spring-boot-starter-data-jpa")
     compile("com.h2database:h2")
     compile('org.postgresql:postgresql:42.2.1')
@@ -41,6 +44,11 @@ dependencies {
     testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-test'
     testCompile group: 'io.github.benas', name: 'random-beans', version: '3.7.0'
     testCompile group: 'org.assertj', name: 'assertj-core', version: '3.9.0'
+
+    // Junit Jupiter
+    testCompile 'org.junit.jupiter:junit-jupiter-api:5.1.0'
+    testCompile 'org.junit.jupiter:junit-jupiter-engine:5.1.0'
+    testCompile 'org.junit.vintage:junit-vintage-engine:5.1.0'
 }
 
 gradle.startParameter.continueOnFailure = true
@@ -80,6 +88,10 @@ jacocoTestReport {
         xml.enabled true
         html.enabled false
     }
+}
+
+test {
+    useJUnitPlatform()
 }
 
 check.dependsOn jacocoTestReport

@@ -4,16 +4,14 @@ import io.github.benas.randombeans.api.EnhancedRandom;
 import io.pitchcast.pitchingservice.domain.Pitch;
 import io.pitchcast.pitchingservice.domain.repository.PitchesRepository;
 import io.pitchcast.pitchingservice.service.PitchesService;
-import io.pitchcast.support.testing.IntegrationTest;
-import org.junit.Test;
-import org.junit.experimental.categories.Category;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import javax.validation.ConstraintViolationException;
 import java.util.List;
@@ -21,9 +19,7 @@ import java.util.List;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatExceptionOfType;
 
-
-@Category(IntegrationTest.class)
-@RunWith(SpringRunner.class)
+@ExtendWith(SpringExtension.class)
 @ActiveProfiles("mysql")
 @Import(PitchesService.class)
 @DataJpaTest

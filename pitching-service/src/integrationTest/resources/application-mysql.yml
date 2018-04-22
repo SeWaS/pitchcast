@@ -1,8 +1,9 @@
 spring:
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: create
   datasource:
-    url: jdbc:mysql://${MYSQL_TEST_DB:127.0.0.1:1234}/testdb?useSSL=false
+    url: jdbc:mysql://127.0.0.1:1234/testdb?useSSL=false
+    driverClassName: com.mysql.jdbc.Driver
     username: root
     password: root
