@@ -21,7 +21,7 @@ import javax.validation.ConstraintViolationException
 @Import(PitchesService::class)
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-class PitchesRepositoryIT {
+open class PitchesRepositoryIT {
 
     @Autowired lateinit var pitchesService: PitchesService
     @Autowired lateinit var pitchesRepository: PitchesRepository
