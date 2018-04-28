@@ -13,13 +13,10 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.test.web.client.TestRestTemplate
 import org.springframework.test.context.junit.jupiter.SpringExtension
+import testing.AcceptanceTest
 
 @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
-@ExtendWith(SpringExtension::class)
-@SpringBootTest(
-        webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
-        classes = [PitchingServiceApp::class]
-)
+@AcceptanceTest(forApp = [PitchingServiceApp::class])
 class AddPitch {
 
     @Autowired lateinit var testRestTemplate: TestRestTemplate
