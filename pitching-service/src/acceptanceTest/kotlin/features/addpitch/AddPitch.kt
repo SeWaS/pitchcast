@@ -2,24 +2,17 @@ package features.addpitch
 
 import io.github.benas.randombeans.api.EnhancedRandom
 import io.pitchcast.pitchingservice.PitchingServiceApp
-import io.pitchcast.pitchingservice.domain.Pitch
 import io.pitchcast.pitchingservice.domain.repository.PitchesRepository
 import io.pitchcast.pitchingservice.web.dto.PitchDto
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.extension.ExtendWith
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.test.web.client.TestRestTemplate
-import org.springframework.test.context.junit.jupiter.SpringExtension
+import testing.AcceptanceTest
 
 @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
-@ExtendWith(SpringExtension::class)
-@SpringBootTest(
-        webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
-        classes = [PitchingServiceApp::class]
-)
+@AcceptanceTest(forApp = [PitchingServiceApp::class])
 class AddPitch {
 
     @Autowired lateinit var testRestTemplate: TestRestTemplate

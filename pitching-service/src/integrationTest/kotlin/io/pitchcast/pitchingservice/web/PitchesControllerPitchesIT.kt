@@ -4,24 +4,20 @@ import io.github.benas.randombeans.api.EnhancedRandom
 import io.github.benas.randombeans.api.EnhancedRandom.random
 import io.pitchcast.pitchingservice.domain.Pitch
 import io.pitchcast.pitchingservice.service.PitchesService
-import io.pitchcast.pitchingservice.web.PitchesController
 import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.extension.ExtendWith
 import org.mockito.BDDMockito.given
 import org.mockito.Mockito.times
 import org.mockito.Mockito.verify
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
 import org.springframework.boot.test.mock.mockito.MockBean
 import org.springframework.http.MediaType
-import org.springframework.test.context.junit.jupiter.SpringExtension
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers
+import testing.WebMvcSliceTest
 import java.util.*
 
-@ExtendWith(SpringExtension::class)
-@WebMvcTest(controllers = [PitchesController::class])
+@WebMvcSliceTest(forController = [PitchesController::class])
 class PitchesControllerPitchesIT {
 
     @Autowired lateinit var mockMvc: MockMvc
