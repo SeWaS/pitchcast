@@ -1,10 +1,9 @@
-package io.pitchcast.pitchingservice.web.pitchescontroller
+package io.pitchcast.pitchingservice.web
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import io.github.benas.randombeans.api.EnhancedRandom
 import io.pitchcast.pitchingservice.domain.Pitch
 import io.pitchcast.pitchingservice.service.PitchesService
-import io.pitchcast.pitchingservice.web.PitchesController
 import io.pitchcast.pitchingservice.web.dto.PitchDto
 import io.pitchcast.pitchingservice.web.dto.PitchTypeDto
 import org.assertj.core.api.Assertions.assertThat
