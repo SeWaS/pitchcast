@@ -20,6 +20,8 @@ This repository has two objectives:
 - Travis-CI
 - CodeCov
 - Codacy
+- Kotlin for tests
+- Java for production code
 
 ## Hot to use the Pitchcast 
 tbd
