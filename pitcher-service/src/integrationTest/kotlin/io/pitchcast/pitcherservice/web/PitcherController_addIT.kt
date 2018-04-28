@@ -20,9 +20,9 @@ import org.springframework.test.context.junit.jupiter.SpringExtension
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers
+import testing.WebMvcSliceTest
 
-@ExtendWith(SpringExtension::class)
-@WebMvcTest(controllers = arrayOf(PitcherController::class))
+@WebMvcSliceTest(forController = [PitcherController::class])
 class PitcherController_addIT {
 
     @Autowired lateinit var mockMvc: MockMvc

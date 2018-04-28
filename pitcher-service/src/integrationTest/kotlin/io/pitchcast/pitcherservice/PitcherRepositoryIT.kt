@@ -14,12 +14,12 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest
 import org.springframework.context.annotation.Import
 import org.springframework.test.context.ActiveProfiles
 import org.springframework.test.context.junit.jupiter.SpringExtension
+import testing.DataJpaSliceTest
 import javax.validation.ConstraintViolationException
 
-@ExtendWith(SpringExtension::class)
+@DataJpaSliceTest
 @ActiveProfiles("postgres")
 @Import(PitcherService::class)
-@DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 open class PitcherRepositoryIT {
 
