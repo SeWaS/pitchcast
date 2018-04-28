@@ -2,6 +2,7 @@ group 'io'
 version '1.0-SNAPSHOT'
 
 apply plugin: 'io.spring.dependency-management'
+apply plugin: 'java'
 
 sourceCompatibility = 1.8
 
