@@ -15,7 +15,6 @@ import testing.DataJpaSliceTest
 import javax.validation.ConstraintViolationException
 
 @DataJpaSliceTest
-@ActiveProfiles("postgres")
 @Import(PitcherService::class)
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 open class PitcherRepositoryIT {
