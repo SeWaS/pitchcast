@@ -16,7 +16,6 @@ import javax.validation.ConstraintViolationException
 
 @DataJpaSliceTest
 @Import(PitchesService::class)
-@ActiveProfiles("mysql")
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 open class PitchesRepositoryIT {
 

@@ -24,6 +24,6 @@ jobs:
       script:
         - docker run -p 1234:3306 --name mysql-test-db -e MYSQL_ROOT_PASSWORD=root -e MYSQL_DATABASE=testdb -d mysql:5.7.22
         - docker run -p 1235:5432 --name postgres-test-db -e POSTGRES_PASSWORD=root -e POSTGRES_DB=pitcher-test-db -e POSTGRES_USER=root -d postgres:latest
-        - ./gradlew check
+        - ./gradlew check -Dspring.profiles.active=mysql,postgres
         - ./gradlew jacocoTestReport
         - bash <(curl -s https://codecov.io/bash)
