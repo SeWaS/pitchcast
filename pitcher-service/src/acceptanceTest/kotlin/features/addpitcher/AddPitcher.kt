@@ -12,7 +12,6 @@ import org.springframework.test.context.ActiveProfiles
 import testing.AcceptanceTest
 
 @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
-@ActiveProfiles("postgres")
 @AcceptanceTest(forApp = [PitcherServiceApp::class])
 class AddPitcher {
 

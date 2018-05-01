@@ -13,7 +13,6 @@ import org.springframework.test.context.ActiveProfiles
 import testing.AcceptanceTest
 
 @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
-@ActiveProfiles("mysql")
 @AcceptanceTest(forApp = [PitchingServiceApp::class])
 class AddPitch {
 
