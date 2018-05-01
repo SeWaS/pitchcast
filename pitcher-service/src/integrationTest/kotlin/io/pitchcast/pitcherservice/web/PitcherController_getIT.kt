@@ -14,7 +14,6 @@ import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers
 import testing.WebMvcSliceTest
-import java.util.*
 
 @WebMvcSliceTest(forController = [PitcherController::class])
 class PitcherController_getIT {
@@ -24,7 +23,7 @@ class PitcherController_getIT {
 
     @Test fun `should return 200 if pitcher`() {
 
-        given<List<Pitcher>>(this.pitcherService.allPitcher).willReturn(Arrays.asList<Pitcher>(
+        given<List<Pitcher>>(this.pitcherService.allPitcher).willReturn(arrayListOf<Pitcher>(
                 random<Pitcher>(Pitcher::class.java),
                 random<Pitcher>(Pitcher::class.java)
         ))
