@@ -16,7 +16,9 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.mock.mockito.MockBean
 import org.springframework.http.MediaType
 import org.springframework.test.web.servlet.MockMvc
+import org.springframework.test.web.servlet.MvcResult
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.asyncDispatch
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers
 import testing.WebMvcSliceTest
 
@@ -33,11 +35,14 @@ class PitchesControllerAddIT{
 
         val validPitch = EnhancedRandom.random(PitchDto::class.java)
 
-        mockMvc.perform(
+        val mockMvcResult: MvcResult = mockMvc.perform(
                 MockMvcRequestBuilders.post("/pitches/")
                         .contentType(MediaType.APPLICATION_JSON_UTF8)
-                        .content(objectMapper.writeValueAsString(validPitch))
-        ).andExpect(MockMvcResultMatchers.status().`is`(201))
+                        .content(objectMapper.writeValueAsString(validPitch)))
+                .andReturn()
+
+        mockMvc.perform(asyncDispatch(mockMvcResult))
+                .andExpect(MockMvcResultMatchers.status().`is`(201))
 
         verify(this.pitchesService).saveNewPitch(pitchArgumentCaptor.capture())
 
@@ -50,8 +55,8 @@ class PitchesControllerAddIT{
         mockMvc.perform(
                 MockMvcRequestBuilders.post("/pitches/")
                         .contentType(MediaType.APPLICATION_JSON_UTF8)
-                        .content("")
-        ).andExpect(MockMvcResultMatchers.status().`is`(400))
+                        .content(""))
+                .andExpect(MockMvcResultMatchers.status().`is`(400))
 
         verify<PitchesService>(this.pitchesService, times(0)).saveNewPitch(any(Pitch::class.java))
     }
@@ -60,8 +65,8 @@ class PitchesControllerAddIT{
         mockMvc.perform(
                 MockMvcRequestBuilders.post("/pitches/")
                         .contentType(MediaType.APPLICATION_JSON_UTF8)
-                        .content(objectMapper.writeValueAsString(""))
-        ).andExpect(MockMvcResultMatchers.status().`is`(400))
+                        .content(objectMapper.writeValueAsString("")))
+                .andExpect(MockMvcResultMatchers.status().`is`(400))
 
         verify<PitchesService>(this.pitchesService, times(0)).saveNewPitch(any<Pitch>(Pitch::class.java))
     }
@@ -76,8 +81,8 @@ class PitchesControllerAddIT{
         mockMvc.perform(
                 MockMvcRequestBuilders.post("/pitches/")
                         .contentType(MediaType.APPLICATION_JSON_UTF8)
-                        .content(objectMapper.writeValueAsString(invalidPitch))
-        ).andExpect(MockMvcResultMatchers.status().`is`(400))
+                        .content(objectMapper.writeValueAsString(invalidPitch)))
+                .andExpect(MockMvcResultMatchers.status().`is`(400))
     }
 
 

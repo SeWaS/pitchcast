@@ -13,6 +13,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.context.request.async.DeferredResult;
+
+import java.util.concurrent.CompletableFuture;
 
 @RestController
 @RequestMapping("/pitches")
@@ -26,8 +29,17 @@ public class PitchesController {
     }
 
     @PostMapping("/")
-    public ResponseEntity<Long> addNewPitch(@RequestBody @Validated PitchDto pitchDto) {
-        return new ResponseEntity(pitchesService.saveNewPitch(DtoTransformer.pitchDtoToPitch(pitchDto)), HttpStatus.CREATED);
+    public DeferredResult<ResponseEntity<Long>> addNewPitch(@RequestBody @Validated PitchDto pitchDto) {
+
+        DeferredResult<ResponseEntity<Long>> deferredResult = new DeferredResult<>();
+
+        CompletableFuture
+                .supplyAsync(() -> pitchesService.saveNewPitch(DtoTransformer.pitchDtoToPitch(pitchDto)))
+                .whenCompleteAsync((result, throwable) -> {
+                    deferredResult.setResult(new ResponseEntity<>(result, HttpStatus.CREATED));
+                });
+
+        return deferredResult;
     }
 
     @GetMapping("/")
