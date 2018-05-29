@@ -14,6 +14,7 @@ This repository has two objectives:
 
 ## A word about technologies
 
+- Spring 5
 - SpringBoot 2
 - Spring Cloud
 - JUnit Jupiter
@@ -23,8 +24,11 @@ This repository has two objectives:
 - Kotlin for tests
 - Java for production code
 
-## Hot to use the Pitchcast 
+## How to use the Pitchcast 
 tbd
+
+## Asynchronous endpoint
+The pithing-service has an asynchronous endpoint for adding new pitches. The endpoint can be called with ``POST`` method under ``/pitches/`` and is implemented in ``PitchesController.java`` using Spring's ``DeferredResult`` and ``CompletableFuture``.
 
 ## How to run all things
 There is good news!! It's quite easy to start the whole system thanks to ``docker-compose``.
