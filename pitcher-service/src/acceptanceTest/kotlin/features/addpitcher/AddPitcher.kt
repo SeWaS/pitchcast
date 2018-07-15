@@ -8,6 +8,7 @@ import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.web.client.TestRestTemplate
+import org.springframework.boot.test.web.client.postForEntity
 import testing.AcceptanceTest
 
 @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
@@ -22,7 +23,7 @@ class AddPitcher {
         val newPitcher = random<PitcherDto>(PitcherDto::class.java)
 
         // when
-        val addPitcherResponse = testRestTemplate.postForEntity("/pitcher/", newPitcher, Long::class.java)
+        val addPitcherResponse = testRestTemplate.postForEntity<Long>("/pitcher/", newPitcher)
 
         // then
         assertThat(addPitcherResponse.statusCodeValue).isEqualTo(201)

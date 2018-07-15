@@ -11,6 +11,7 @@ import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.web.client.TestRestTemplate
+import org.springframework.boot.test.web.client.getForEntity
 import testing.AcceptanceTest
 
 @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
@@ -30,7 +31,7 @@ class GetPitch {
         repository.flush()
 
         // when
-        val getPitchesResponse = testRestTemplate.getForEntity("/pitches/", PitchesDto::class.java)
+        val getPitchesResponse = testRestTemplate.getForEntity<PitchesDto>("/pitches/")
 
         // then
         assertThat(getPitchesResponse.statusCodeValue).isEqualTo(200)
@@ -51,7 +52,7 @@ class GetPitch {
         repository.saveAndFlush(pitchForPitcher)
 
         // when
-        val getPitchesResponse = testRestTemplate.getForEntity("/pitches/123", PitchesDto::class.java)
+        val getPitchesResponse = testRestTemplate.getForEntity<PitchesDto>("/pitches/123")
 
         // then
         assertThat(getPitchesResponse.statusCodeValue).isEqualTo(200)

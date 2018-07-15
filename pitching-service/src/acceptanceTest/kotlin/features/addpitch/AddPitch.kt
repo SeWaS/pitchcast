@@ -9,6 +9,7 @@ import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.web.client.TestRestTemplate
+import org.springframework.boot.test.web.client.postForEntity
 import testing.AcceptanceTest
 
 @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
@@ -27,7 +28,7 @@ class AddPitch {
         val pitch = EnhancedRandom.random(PitchDto::class.java)
 
         // when
-        val getPitchesResponse = testRestTemplate.postForEntity("/pitches/", pitch, Long::class.java)
+        val getPitchesResponse = testRestTemplate.postForEntity<Long>("/pitches/", pitch)
 
         // then
         assertThat(getPitchesResponse.statusCodeValue).isEqualTo(201)
