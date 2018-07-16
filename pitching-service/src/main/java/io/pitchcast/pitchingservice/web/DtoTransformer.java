@@ -10,29 +10,34 @@ import org.springframework.beans.BeanUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class DtoTransformer {
 
-    public static Pitch pitchDtoToPitch(PitchDto pitchDto) {
-        Pitch pitch = new Pitch();
-        copyPitchesValue(pitchDto, pitch);
-        return pitch;
+    public static List<Pitch> transformToPitch(List<PitchDto> pitcherDtos) {
+        return pitcherDtos.stream()
+                .map(dto -> {
+                    Pitch pitch = new Pitch();
+                    copyPitchesValue(dto, pitch);
+                    return pitch;
+                })
+                .collect(Collectors.toList());
+    }
+
+    public static List<PitchDto> transformToPitchDto(List<Pitch> pitchers) {
+        return pitchers.stream()
+                .map(pitcher -> {
+                    PitchDto pitchDto = new PitchDto();
+                    copyPitchesDtoValue(pitcher, pitchDto);
+                    return pitchDto;
+                })
+                .collect(Collectors.toList());
     }
 
     private static void copyPitchesValue(PitchDto pitchDto, Pitch pitch) {
         BeanUtils.copyProperties(pitchDto, pitch);
         pitch.setPitchResult(PitchResult.valueOf(pitchDto.getPitchResult().name()));
         pitch.setPitchType(PitchType.valueOf(pitchDto.getPitchType().name()));
-    }
-
-    public static List<PitchDto> listOfPitchToListOfPitchDto(List<Pitch> pitches) {
-        List<PitchDto> pitchDtos = new ArrayList<>();
-        for(Pitch pitch: pitches) {
-            PitchDto pitchDto = new PitchDto();
-            copyPitchesDtoValue(pitch, pitchDto);
-            pitchDtos.add(pitchDto);
-        }
-        return pitchDtos;
     }
 
     private static void copyPitchesDtoValue(Pitch pitch, PitchDto pitchDto) {

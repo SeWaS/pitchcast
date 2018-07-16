@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.async.DeferredResult;
 
+import java.util.Collections;
 import java.util.concurrent.CompletableFuture;
 
 @RestController
@@ -34,7 +35,11 @@ public class PitchesController {
         DeferredResult<ResponseEntity<Long>> deferredResult = new DeferredResult<>();
 
         CompletableFuture
-                .supplyAsync(() -> pitchesService.saveNewPitch(DtoTransformer.pitchDtoToPitch(pitchDto)))
+                .supplyAsync(
+                        () -> pitchesService.saveNewPitch(
+                                DtoTransformer.transformToPitch(Collections.singletonList(pitchDto)).get(0)
+                        )
+                )
                 .whenCompleteAsync((result, throwable) -> {
                     deferredResult.setResult(new ResponseEntity<>(result, HttpStatus.CREATED));
                 });
@@ -45,14 +50,14 @@ public class PitchesController {
     @GetMapping("/")
     public ResponseEntity<PitchesDto> getAllPitches() {
         PitchesDto receivedPitches = new PitchesDto();
-        receivedPitches.setPitches(DtoTransformer.listOfPitchToListOfPitchDto(pitchesService.getAllPitches()));
+        receivedPitches.setPitches(DtoTransformer.transformToPitchDto(pitchesService.getAllPitches()));
         return ResponseEntity.ok(receivedPitches);
     }
 
     @GetMapping("/{pitcherId}")
     public ResponseEntity<PitchesDto> getPitcherByPitcher(@PathVariable(name = "pitcherId") Long pitcherId) {
         PitchesDto receivedPitches = new PitchesDto();
-        receivedPitches.setPitches(DtoTransformer.listOfPitchToListOfPitchDto(pitchesService.getPitchesByPitcher(pitcherId)));
+        receivedPitches.setPitches(DtoTransformer.transformToPitchDto(pitchesService.getPitchesByPitcher(pitcherId)));
         return ResponseEntity.ok(receivedPitches);
     }
 

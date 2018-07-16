@@ -13,6 +13,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Arrays;
+import java.util.Collections;
+
 
 @RestController
 @RequestMapping("/pitcher")
@@ -27,13 +30,15 @@ public class PitcherController {
 
     @PostMapping("/")
     public ResponseEntity<Long> addNewPitcher(@RequestBody @Validated PitcherDto pitcher) {
-        return new ResponseEntity(pitcherService.savePitcher(DtoTransformer.pitcherDtoToPitcher(pitcher)), HttpStatus.CREATED);
+        return new ResponseEntity<>(
+                pitcherService.savePitcher(DtoTransformer.transformToPitcher(Collections.singletonList(pitcher)).get(0)),
+                HttpStatus.CREATED);
     }
 
     @GetMapping("/")
     public ResponseEntity<PitchersDto> getAllPitcher() {
         PitchersDto receivedPitchers = new PitchersDto();
-        receivedPitchers.setPitchers(DtoTransformer.listOfPitcherToListOfPitcherDto(pitcherService.getAllPitcher()));
+        receivedPitchers.setPitchers(DtoTransformer.transformToPitcherDto(pitcherService.getAllPitcher()));
         return ResponseEntity.ok(receivedPitchers);
     }
 
